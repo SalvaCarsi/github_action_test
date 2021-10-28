@@ -2,4 +2,7 @@ name: "Bump version and remove old tags"
 description: "Bump version and remove old tags"
 runs:
   using: 'docker'
-  image: 'bumpversion.Dockerfile'
+  image: 'bump_version.Dockerfile'
+runs:
+  using: 'docker'
+  image: 'remove_old_tags.Dockerfile'

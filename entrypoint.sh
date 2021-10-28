@@ -1,5 +1,3 @@
-#!/bin/bash
-
-set -o pipefail
+#!/bin/sh -l
 
 echo '>>>>>>>>>>>>>>>>>'

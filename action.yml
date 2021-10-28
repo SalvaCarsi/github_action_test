@@ -1,6 +1,5 @@
 name: "foo"
 description: "bar"
-
 runs:
   using: 'docker'
   image: 'Dockerfile'

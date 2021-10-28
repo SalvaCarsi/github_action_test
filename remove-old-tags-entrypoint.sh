@@ -8,6 +8,8 @@ then
   exit 0
 fi
 
+echo "this tags are going to be removed: $tags_to_remove"
+
 for tag in $tags_to_remove
 do
   git tag --delete $tag

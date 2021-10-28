@@ -2,10 +2,5 @@ name: "foo"
 description: "bar"
 
 runs:
-  using: "composite"
-  steps:
-    - name: Bump version and push tag
-      run: |
-        chmod +x ./scripts/test.sh
-        ./scripts/test.sh
-      shell: bash
+  using: 'docker'
+  image: 'Dockerfile'

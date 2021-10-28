@@ -2,7 +2,7 @@ name: "foo"
 description: "bar"
 
 runs:
-  using: "composite"
+  runs-on: ubuntu-latest
   steps:
     - name: Bump version and push tag
       run: |

@@ -8,3 +8,4 @@ runs:
       run: |
         chmod +x ./scripts/test.sh
         ./scripts/test.sh
+      shell: bash

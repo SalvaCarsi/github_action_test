@@ -1,0 +1,9 @@
+name: "foo"
+description: "bar"
+
+runs:
+  steps:
+    - name: Bump version and push tag
+      run: |
+        chmod +x ./scripts/test.sh
+        ./scripts/test.sh

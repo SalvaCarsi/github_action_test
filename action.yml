@@ -1,5 +1,5 @@
-name: "foo"
-description: "bar"
+name: "Bump version and remove old tags"
+description: "Bump version and remove old tags"
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'bumpversion.Dockerfile'

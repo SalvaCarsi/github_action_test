@@ -3,6 +3,3 @@ description: "Bump version and remove old tags"
 runs:
   using: 'docker'
   image: 'bump_version.Dockerfile'
-runs:
-  using: 'docker'
-  image: 'remove_old_tags.Dockerfile'

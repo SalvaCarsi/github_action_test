@@ -25,9 +25,7 @@ fi
 
 tag_without_v="${tag:1}"
 
-((tag_without_v++))
-
-new="v$tag_without_v"
+new="v"$((tag_without_v++))
 
 echo "new tag will be $new"
 

@@ -1,64 +1,66 @@
 #!/bin/bash
 
-set -o pipefail
+echo '>>>>>>>>>>>>>>>>'
 
-cd ${GITHUB_WORKSPACE}/.
+#set -o pipefail
 
-# fetch tags
-git fetch --tags
+#cd ${GITHUB_WORKSPACE}/.
 
-tag=$(git for-each-ref --sort=-v:refname --format '%(refname:lstrip=2)' | grep -E "^v?[0-9]+$" | head -n1)
+## fetch tags
+#git fetch --tags
 
-log=$(git log --pretty='%B')
+#tag=$(git for-each-ref --sort=-v:refname --format '%(refname:lstrip=2)' | grep -E "^v?[0-9]+$" | head -n1)
 
-# get current commit hash for tag
-tag_commit=$(git rev-list -n 1 $tag)
+#log=$(git log --pretty='%B')
 
-# get current commit hash
-commit=$(git rev-parse HEAD)
+## get current commit hash for tag
+#tag_commit=$(git rev-list -n 1 $tag)
 
-if [ "$tag_commit" == "$commit" ]; then
-    echo "No new commits since previous tag. Skipping..."
-    echo ::set-output name=tag::$tag
-    exit 0
-fi
+## get current commit hash
+#commit=$(git rev-parse HEAD)
 
-tag_without_v="${tag:1}"
+#if [ "$tag_commit" == "$commit" ]; then
+#    echo "No new commits since previous tag. Skipping..."
+#    echo ::set-output name=tag::$tag
+#    exit 0
+#fi
 
-((tag_without_v++))
+#tag_without_v="${tag:1}"
 
-new="v$tag_without_v"
+#((tag_without_v++))
 
-echo "new tag will be $new"
+#new="v$tag_without_v"
 
-# create local git tag
-git tag $new
+#echo "new tag will be $new"
 
-# push new tag ref to github
-dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
-full_name=$GITHUB_REPOSITORY
-git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
+## create local git tag
+#git tag $new
 
-echo "$dt: **pushing tag $new to repo $full_name"
+## push new tag ref to github
+#dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
+#full_name=$GITHUB_REPOSITORY
+#git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
 
-git_refs_response=$(
-curl -s -X POST $git_refs_url \
--H "Authorization: token $GITHUB_TOKEN" \
--d @- << EOF
+#echo "$dt: **pushing tag $new to repo $full_name"
 
-{
-  "ref": "refs/tags/$new",
-  "sha": "$commit"
-}
-EOF
-)
+#git_refs_response=$(
+#curl -s -X POST $git_refs_url \
+#-H "Authorization: token $GITHUB_TOKEN" \
+#-d @- << EOF
 
-git_ref_posted=$( echo "${git_refs_response}" | jq .ref | tr -d '"' )
+#{
+#  "ref": "refs/tags/$new",
+#  "sha": "$commit"
+#}
+#EOF
+#)
 
-echo "::debug::${git_refs_response}"
-if [ "${git_ref_posted}" = "refs/tags/${new}" ]; then
-  exit 0
-else
-  echo "::error::Tag was not created properly."
-  exit 1
-fi
+#git_ref_posted=$( echo "${git_refs_response}" | jq .ref | tr -d '"' )
+
+#echo "::debug::${git_refs_response}"
+#if [ "${git_ref_posted}" = "refs/tags/${new}" ]; then
+#  exit 0
+#else
+#  echo "::error::Tag was not created properly."
+#  exit 1
+#fi

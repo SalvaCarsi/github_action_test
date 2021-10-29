@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+echo '...............'
+
 git fetch --prune --prune-tags
 tags_to_remove=$(git tag --sort=-creatordate | tail -n +31)
 if [ -z "$tags_to_remove" ]

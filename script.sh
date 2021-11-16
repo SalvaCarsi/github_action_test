@@ -27,8 +27,6 @@ tag_without_v="${tag:1}"
 
 incremented_tag="$(($tag_without_v + 1))"
 
-echo ">>>>>>>>>>>>>>>> $incremented_tag"
-
 new="v$incremented_tag"
 
 echo "new tag will be $new"

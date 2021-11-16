@@ -25,11 +25,11 @@ fi
 
 tag_without_v="${tag:1}"
 
-((tag_without_v++))
+incremented_tag="$(($tag_without_v + 1))"
 
-echo ">>>>>>>>>>>>>>>> $tag_without_v"
+echo ">>>>>>>>>>>>>>>> $incremented_tag"
 
-new="v$tag_without_v"
+new="v$incremented_tag"
 
 echo "new tag will be $new"
 
